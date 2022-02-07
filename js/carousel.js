@@ -7,7 +7,17 @@ export class Carousel {
         this.position = 0;
         this.create_title();
         this.create_cover();
-        this.add_btn_event_click()
+        this.add_btn_event_click();
+        this.delete_buttons();
+    }
+
+    delete_buttons() {
+        if( this.movies.length < 5) {
+            let el_previous_button = this.element.querySelectorAll(".carousel__btn_previous");
+            el_previous_button[0].remove();
+            let el_next_button = this.element.querySelectorAll(".carousel__btn_next");
+            el_next_button[0].remove();
+        }
     }
 
     create_title() {
@@ -19,11 +29,13 @@ export class Carousel {
         let div_cover = this.element.querySelector('.carousel__cover');
         let i = this.position;
         for(let x = 0; x < 4; x++) {
-            let el_img = document.createElement("img");
-            el_img.setAttribute("src", this.movies[i].image_url)
-            el_img.setAttribute("alt", this.movies[i].title)
-            div_cover.appendChild(el_img);
-            i = this.next_position(i);
+            if(this.movies[i]) {
+                let el_img = document.createElement("img");
+                el_img.setAttribute("src", this.movies[i].image_url)
+                el_img.setAttribute("alt", this.movies[i].title)
+                div_cover.appendChild(el_img);
+                i = this.next_position(i);
+            }
         }
     }
 
