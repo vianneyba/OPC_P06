@@ -1,0 +1,11 @@
+{
+  "name": "front_juststreamit",
+  "version": "1.0.0",
+  "description": "front du site JustStreamIt",
+  "main": "js/main.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./public/css/style.css"
+  },
+  "author": "",
+  "license": "ISC"
+}

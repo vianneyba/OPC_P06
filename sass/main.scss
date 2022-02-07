@@ -1,0 +1,105 @@
+$primary-color:#C4D7F2;
+$secondary-color:#AFDEDC;
+$tertiary-color:#91A8A4;
+
+body {
+    background: $secondary-color;
+    margin: auto;
+}
+
+header {
+    
+    list-style: none ;
+    text-align: center ;
+    height: 125px;
+    img {
+        float: left;
+        height: 125px;
+    }
+    li {
+        position: relative;
+        top: 40px;
+        background: $primary-color;
+        display: inline;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 25px;
+        border: 1px solid;
+    }
+}
+
+#best_film {
+  background: $tertiary-color;
+  margin: 10px;
+  padding: 10PX;
+}
+
+.carousel {
+  h1 {
+    text-align: center;
+  }
+  img {
+    width: calc(182px/2);
+    height: calc(268px/2);
+    margin: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .carousel_img {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    img {
+      @media screen and (min-width: 850px){
+        width: 182px;
+        height: 268px;
+      }
+      @media screen and (max-width: 490px){
+        width: calc(182px/3);
+        height: calc(268px/3);
+      }
+    }    
+  }
+}
+
+.modal {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 90%;
+    height: 90%;
+    overflow: auto;
+    background-color: #fefefe;
+    .modal-content {
+      color: black;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+    .close {
+      color: $primary-color;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      margin: 20px;
+      &:hover, &:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
+    .movie_title {
+      text-align: center;
+    }
+    img {
+      margin: 20px;
+    }
+  }
+
+
+  

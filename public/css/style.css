@@ -1,0 +1,99 @@
+body {
+  background: #AFDEDC;
+  margin: auto;
+}
+
+header {
+  list-style: none;
+  text-align: center;
+  height: 125px;
+}
+header img {
+  float: left;
+  height: 125px;
+}
+header li {
+  position: relative;
+  top: 40px;
+  background: #C4D7F2;
+  display: inline;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 25px;
+  border: 1px solid;
+}
+
+#best_film {
+  background: #91A8A4;
+  margin: 10px;
+  padding: 10PX;
+}
+
+.carousel h1 {
+  text-align: center;
+}
+.carousel img {
+  width: 91px;
+  height: 134px;
+  margin: 10px;
+}
+.carousel img:hover {
+  cursor: pointer;
+}
+.carousel .carousel_img {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+@media screen and (min-width: 850px) {
+  .carousel .carousel_img img {
+    width: 182px;
+    height: 268px;
+  }
+}
+@media screen and (max-width: 490px) {
+  .carousel .carousel_img img {
+    width: 60.6666666667px;
+    height: 89.3333333333px;
+  }
+}
+
+.modal {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 90%;
+  height: 90%;
+  overflow: auto;
+  background-color: #fefefe;
+}
+.modal .modal-content {
+  color: black;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+.modal .close {
+  color: #C4D7F2;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 20px;
+}
+.modal .close:hover, .modal .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modal .movie_title {
+  text-align: center;
+}
+.modal img {
+  margin: 20px;
+}
+
+/*# sourceMappingURL=style.css.map */

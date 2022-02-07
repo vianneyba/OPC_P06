@@ -57,6 +57,7 @@ function add_image_event_click(element) {
     let el_covers = element.querySelectorAll('img');
     for (let el_cover of el_covers){
         el_cover.addEventListener("click", ()=>{
+            window.scrollTo(0, 0);
             let id = el_cover.getAttribute("id_movie");
             get_request(`${url}${id}`).then(
                 movie => {
