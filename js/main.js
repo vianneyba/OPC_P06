@@ -1,10 +1,13 @@
 import * as carousel from "./carousel.js";
+import * as modal from "./modal.js";
 
 const url = "http://127.0.0.1/api/v1/titles/";
 const url_genre = "http://127.0.0.1/api/v1/genres/"
 const url_by_imdb_score = `${url}?sort_by=-imdb_score`
 
 let carousel_div = document.getElementsByClassName('carousel');
+let modal_div = document.querySelector('#myModal');
+modal_div.style.display = "none";
 
 const get_request = async (url) => {
     let response = await fetch(url)
@@ -50,11 +53,37 @@ const get_genre = async (url) => {
     return genres;
 }
 
+function add_image_event_click(element) {
+    let el_covers = element.querySelectorAll('img');
+    for (let el_cover of el_covers){
+        el_cover.addEventListener("click", ()=>{
+            let id = el_cover.getAttribute("id_movie");
+            get_request(`${url}${id}`).then(
+                movie => {
+                    modal_div.style.display = "block";
+                    let new_modal = new modal.Modal(movie, modal_div);
+                    new_modal.create_modal();
+                    new_modal.add_btn(modal_div);
+
+                }
+            )
+        });
+    }
+}
+
+function add_close_event_click() {
+    let el_close_button = element.querySelectorAll('close')[0];
+    el_close_button.addEventListener("click", ()=>{
+        modal_div.style.display = "none";
+    });
+}
+
 let best_movies = get_movies(url_by_imdb_score);
 best_movies.then(
     response => {
         let el_carousel_one = document.querySelector('#carousel_one');
         new carousel.Carousel(response, {}, el_carousel_one, "Films les mieux notés")
+        add_image_event_click(el_carousel_one);
         let best_film = response[0];
         best_film = get_request(best_film.url)
         best_film.then(
@@ -95,6 +124,7 @@ select_genres().then(
             get_movies(`${url}?genre=${genre}`).then(
                 response => {
                     new carousel.Carousel(response, {}, carousel_div[i], genre)
+                    add_image_event_click(carousel_div[i]);
                     i++;
                 }
 

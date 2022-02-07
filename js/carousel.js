@@ -31,8 +31,9 @@ export class Carousel {
         for(let x = 0; x < 4; x++) {
             if(this.movies[i]) {
                 let el_img = document.createElement("img");
-                el_img.setAttribute("src", this.movies[i].image_url)
-                el_img.setAttribute("alt", this.movies[i].title)
+                el_img.setAttribute("src", this.movies[i].image_url);
+                el_img.setAttribute("alt", this.movies[i].title);
+                el_img.setAttribute("id_movie", this.movies[i].id);
                 div_cover.appendChild(el_img);
                 i = this.next_position(i);
             }
