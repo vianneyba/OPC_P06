@@ -1,1 +1,1 @@
-console.log("salut");
+import * as carousel from "./carousel.js";
