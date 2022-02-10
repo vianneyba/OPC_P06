@@ -126,12 +126,10 @@ let select_genres = async () => {
 if (typeof genres === 'undefined') {
     select_genres().then(
         response => {
-            console.log(response)
             let i = 1;
             for(const genre of response) {
                 get_movies(`${url}?genre=${genre}`).then(
                     response => {
-                        console.log(genre)
                         new carousel.Carousel(response, {}, carousel_div[i], genre)
                         add_image_event_click(carousel_div[i]);
                         i++;
@@ -146,7 +144,6 @@ if (typeof genres === 'undefined') {
     for(const genre of genres) {
         get_movies(`${url}?genre=${genre}`).then(
             response => {
-                console.log(genre)
                 new carousel.Carousel(response, {}, carousel_div[i], genre)
                 add_image_event_click(carousel_div[i]);
                 i++;
