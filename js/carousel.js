@@ -45,6 +45,7 @@ export class Carousel {
         for (let picture of pictures) {
             picture.setAttribute("src", this.movies[i].image_url);
             picture.setAttribute("alt", this.movies[i].title);
+            picture.setAttribute("id_movie", this.movies[i].id);
             i = this.next_position(i);
         }
         if (direction === "left") {
