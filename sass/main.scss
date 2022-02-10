@@ -32,15 +32,30 @@ header {
   background: $tertiary-color;
   margin: 10px;
   padding: 10PX;
+  .center {
+    text-align:center;
+    height: 10px;
+  }
+  .best_film_button {
+    display: inline-block;
+    background: $primary-color;
+    display: inline-block;
+    font-size: 16px;
+    padding: 5px 20px;
+    cursor: pointer;
+  }
 }
 
 .carousel {
+  margin: auto;
+  text-align:center;
+  width: 75%;
   h1 {
     text-align: center;
   }
   img {
-    width: calc(182px/2);
-    height: calc(268px/2);
+    width: calc(182px/1.5);
+    height: calc(268px/1.5);
     margin: 10px;
     &:hover {
       cursor: pointer;
@@ -51,11 +66,19 @@ header {
     justify-content: space-around;
     align-items: center;
     img {
-      @media screen and (min-width: 850px){
+      @media screen and (min-width: 1137px){
         width: 182px;
         height: 268px;
       }
-      @media screen and (max-width: 490px){
+      @media screen and (max-width: 814px){
+        width: calc(182px/2);
+        height: calc(268px/2);
+      }
+      @media screen and (max-width: 652px){
+        width: calc(182px/2.5);
+        height: calc(268px/2.5);
+      }
+      @media screen and (max-width: 555px){
         width: calc(182px/3);
         height: calc(268px/3);
       }

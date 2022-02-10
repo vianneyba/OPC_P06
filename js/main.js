@@ -53,31 +53,33 @@ const get_genre = async (url) => {
     return genres;
 }
 
+function get_modal_by_movie(id) {
+    get_request(`${url}${id}`).then(
+        movie => {
+            modal_div.style.display = "block";
+            let new_modal = new modal.Modal(movie, modal_div);
+            new_modal.create_modal();
+            new_modal.add_btn(modal_div);
+        }
+    );
+}
+
 function add_image_event_click(element) {
     let el_covers = element.querySelectorAll('img');
     for (let el_cover of el_covers){
         el_cover.addEventListener("click", ()=>{
             window.scrollTo(0, 0);
             let id = el_cover.getAttribute("id_movie");
-            get_request(`${url}${id}`).then(
-                movie => {
-                    modal_div.style.display = "block";
-                    let new_modal = new modal.Modal(movie, modal_div);
-                    new_modal.create_modal();
-                    new_modal.add_btn(modal_div);
-
-                }
-            )
+            get_modal_by_movie(id);
         });
     }
 }
 
-function add_close_event_click() {
-    let el_close_button = element.querySelectorAll('close')[0];
-    el_close_button.addEventListener("click", ()=>{
-        modal_div.style.display = "none";
-    });
-}
+let best_film_button = document.querySelectorAll('.best_film_button')[0];
+best_film_button.addEventListener("click", ()=>{
+    let id = best_film_button.getAttribute("id_movie");
+    get_modal_by_movie(id);
+});
 
 let best_movies = get_movies(url_by_imdb_score);
 best_movies.then(
@@ -89,6 +91,8 @@ best_movies.then(
         best_film = get_request(best_film.url)
         best_film.then(
             response => {
+                let best_film_button = document.querySelectorAll('.best_film_button')[0];
+                best_film_button.setAttribute("id_movie", response.id);
                 let best_film_title = document.querySelector('#best_film_title');
                 best_film_title.innerHTML = response.title;
                 let best_film_description = document.querySelector('#best_film_description');

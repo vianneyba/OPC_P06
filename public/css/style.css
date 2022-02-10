@@ -28,13 +28,30 @@ header li {
   margin: 10px;
   padding: 10PX;
 }
+#best_film .center {
+  text-align: center;
+  height: 10px;
+}
+#best_film .best_film_button {
+  display: inline-block;
+  background: #C4D7F2;
+  display: inline-block;
+  font-size: 16px;
+  padding: 5px 20px;
+  cursor: pointer;
+}
 
+.carousel {
+  margin: auto;
+  text-align: center;
+  width: 75%;
+}
 .carousel h1 {
   text-align: center;
 }
 .carousel img {
-  width: 91px;
-  height: 134px;
+  width: 121.3333333333px;
+  height: 178.6666666667px;
   margin: 10px;
 }
 .carousel img:hover {
@@ -45,13 +62,25 @@ header li {
   justify-content: space-around;
   align-items: center;
 }
-@media screen and (min-width: 850px) {
+@media screen and (min-width: 1137px) {
   .carousel .carousel_img img {
     width: 182px;
     height: 268px;
   }
 }
-@media screen and (max-width: 490px) {
+@media screen and (max-width: 814px) {
+  .carousel .carousel_img img {
+    width: 91px;
+    height: 134px;
+  }
+}
+@media screen and (max-width: 652px) {
+  .carousel .carousel_img img {
+    width: 72.8px;
+    height: 107.2px;
+  }
+}
+@media screen and (max-width: 555px) {
   .carousel .carousel_img img {
     width: 60.6666666667px;
     height: 89.3333333333px;
