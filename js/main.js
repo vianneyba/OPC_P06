@@ -123,32 +123,30 @@ let select_genres = async () => {
     return result;
 }
 
+function get_movies_by_genre(genre, element) {
+    get_movies(`${url}?genre=${genre}`).then(
+        response => {
+            new carousel.Carousel(response, element, genre, options)
+            add_image_event_click(element);
+        }
+        
+    );
+}
+
 if (typeof genres === 'undefined') {
     select_genres().then(
         response => {
             let i = 1;
             for(const genre of response) {
-                get_movies(`${url}?genre=${genre}`).then(
-                    response => {
-                        new carousel.Carousel(response, carousel_div[i], genre, options)
-                        add_image_event_click(carousel_div[i]);
-                        i++;
-                    }
-                    
-                );
+                get_movies_by_genre(genre, carousel_div[i]);
+                i++;
             }
         }
     );         
 } else {
     let i = 1;
     for(const genre of genres) {
-        get_movies(`${url}?genre=${genre}`).then(
-            response => {
-                new carousel.Carousel(response, carousel_div[i], genre, options)
-                add_image_event_click(carousel_div[i]);
-                i++;
-            }
-            
-        );
+        get_movies_by_genre(genre, carousel_div[i]);
+        i++;
     }       
 }
