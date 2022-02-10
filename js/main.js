@@ -1,9 +1,11 @@
 import * as carousel from "./carousel.js";
 import * as modal from "./modal.js";
 
-const url = "http://127.0.0.1/api/v1/titles/";
-const url_genre = "http://127.0.0.1/api/v1/genres/"
-const url_by_imdb_score = `${url}?sort_by=-imdb_score`
+const url_base = "http://127.0.0.1/";
+const url = `${url_base}api/v1/titles/`;
+const url_genre = `${url_base}api/v1/genres/`;
+const url_by_imdb_score = `${url}?sort_by=-imdb_score`;
+const genres = ["Thriller", "Adventure", "Romance"];
 
 let carousel_div = document.getElementsByClassName('carousel');
 let modal_div = document.querySelector('#myModal');
@@ -121,19 +123,35 @@ let select_genres = async () => {
     return result;
 }
 
-select_genres().then(
-    response => {
-        // response = ["Reality-TV"];
-        let i = 1;
-        for(const genre of response) {
-            get_movies(`${url}?genre=${genre}`).then(
-                response => {
-                    new carousel.Carousel(response, {}, carousel_div[i], genre)
-                    add_image_event_click(carousel_div[i]);
-                    i++;
-                }
-
-            );
+if (typeof genres === 'undefined') {
+    select_genres().then(
+        response => {
+            console.log(response)
+            let i = 1;
+            for(const genre of response) {
+                get_movies(`${url}?genre=${genre}`).then(
+                    response => {
+                        console.log(genre)
+                        new carousel.Carousel(response, {}, carousel_div[i], genre)
+                        add_image_event_click(carousel_div[i]);
+                        i++;
+                    }
+                    
+                );
+            }
         }
-    }
-)
+    );         
+} else {
+    let i = 1;
+    for(const genre of genres) {
+        get_movies(`${url}?genre=${genre}`).then(
+            response => {
+                console.log(genre)
+                new carousel.Carousel(response, {}, carousel_div[i], genre)
+                add_image_event_click(carousel_div[i]);
+                i++;
+            }
+            
+        );
+    }       
+}
