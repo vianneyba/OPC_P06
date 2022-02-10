@@ -5,6 +5,7 @@ const url_base = "http://127.0.0.1/";
 const url = `${url_base}api/v1/titles/`;
 const url_genre = `${url_base}api/v1/genres/`;
 const url_by_imdb_score = `${url}?sort_by=-imdb_score`;
+const options = {'visible': 4, 'nbr_movie': 7}
 const genres = ["Thriller", "Adventure", "Romance"];
 
 let carousel_div = document.getElementsByClassName('carousel');
@@ -24,10 +25,10 @@ const get_movies = async (url) => {
     let i = 1;
     let page = "&page=";
     let movies = [];
-    while (movies.length < 7) {
+    while (movies.length < options['nbr_movie']) {
         let response = await get_request(url+page+i);
         for(let movie of response.results){
-            if(movies.length < 7) {
+            if(movies.length < options['nbr_movie']) {
                 movies.push(movie);
             }
         }
@@ -86,9 +87,8 @@ best_film_button.addEventListener("click", ()=>{
 let best_movies = get_movies(url_by_imdb_score);
 best_movies.then(
     response => {
-        let el_carousel_one = document.querySelector('#carousel_one');
-        new carousel.Carousel(response, {}, el_carousel_one, "Films les mieux notés")
-        add_image_event_click(el_carousel_one);
+        new carousel.Carousel(response, carousel_div[0], "Films les mieux notés", options)
+        add_image_event_click(carousel_div[0]);
         let best_film = response[0];
         best_film = get_request(best_film.url)
         best_film.then(
@@ -130,7 +130,7 @@ if (typeof genres === 'undefined') {
             for(const genre of response) {
                 get_movies(`${url}?genre=${genre}`).then(
                     response => {
-                        new carousel.Carousel(response, {}, carousel_div[i], genre)
+                        new carousel.Carousel(response, carousel_div[i], genre, options)
                         add_image_event_click(carousel_div[i]);
                         i++;
                     }
@@ -144,7 +144,7 @@ if (typeof genres === 'undefined') {
     for(const genre of genres) {
         get_movies(`${url}?genre=${genre}`).then(
             response => {
-                new carousel.Carousel(response, {}, carousel_div[i], genre)
+                new carousel.Carousel(response, carousel_div[i], genre, options)
                 add_image_event_click(carousel_div[i]);
                 i++;
             }

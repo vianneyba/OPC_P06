@@ -1,5 +1,5 @@
 export class Carousel {
-    constructor(movies, options, element, type) {
+    constructor(movies, element, type, options) {
         this.movies = movies;
         this.options = options;
         this.element = element;
@@ -12,7 +12,7 @@ export class Carousel {
     }
 
     delete_buttons() {
-        if( this.movies.length < 5) {
+        if( this.movies.length < this.options['visible'] + 1) {
             let el_previous_button = this.element.querySelectorAll(".carousel__btn_previous");
             el_previous_button[0].remove();
             let el_next_button = this.element.querySelectorAll(".carousel__btn_next");
@@ -28,7 +28,7 @@ export class Carousel {
     create_cover() {
         let div_cover = this.element.querySelector('.carousel__cover');
         let i = this.position;
-        for(let x = 0; x < 4; x++) {
+        for(let x = 0; x < this.options['visible']; x++) {
             if(this.movies[i]) {
                 let el_img = document.createElement("img");
                 el_img.setAttribute("src", this.movies[i].image_url);
@@ -67,13 +67,13 @@ export class Carousel {
 
     previous_position(i) {
         if (i === 0) { 
-            return 6;
+            return this.options['nbr_movie'] - 1;
         } 
-        return (i - 1) % 7;
+        return (i - 1) % this.options['nbr_movie'];
     }
 
     next_position(i) {
-        return (i + 1) % 7;
+        return (i + 1) % this.options['nbr_movie'];
     }
 
     move_left() {
