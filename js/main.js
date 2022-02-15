@@ -5,7 +5,7 @@ const url_base = "http://127.0.0.1/";
 const url = `${url_base}api/v1/titles/`;
 const url_genre = `${url_base}api/v1/genres/`;
 const url_by_imdb_score = `${url}?sort_by=-imdb_score`;
-const options = {'visible': 4, 'nbr_movie': 7}
+const options = {'visible': 4, 'nbr_movie': 7};
 const genres = ["Thriller", "Adventure", "Romance"];
 
 let carousel_div = document.getElementsByClassName('carousel');
@@ -13,7 +13,7 @@ let modal_div = document.querySelector('#myModal');
 modal_div.style.display = "none";
 
 const get_request = async (url) => {
-    let response = await fetch(url)
+    let response = await fetch(url);
     if (response.ok){
         return response.json();
     } else{
@@ -42,13 +42,13 @@ const get_movies = async (url) => {
 
 const get_genre = async (url) => {
     let genres = [];
-    url = url
+    url = url;
     let response = null;
     do {
         response = await get_request(url);
         url = response.next;
         for(let genre of response.results) {
-            genres.push(genre.name)
+            genres.push(genre.name);
         }
 
     }while(response.next != null);
@@ -90,7 +90,7 @@ best_movies.then(
         new carousel.Carousel(response, carousel_div[0], "Films les mieux notés", options)
         add_image_event_click(carousel_div[0]);
         let best_film = response[0];
-        best_film = get_request(best_film.url)
+        best_film = get_request(best_film.url);
         best_film.then(
             response => {
                 let best_film_button = document.querySelectorAll('.best_film_button')[0];
@@ -100,7 +100,7 @@ best_movies.then(
                 let best_film_description = document.querySelector('#best_film_description');
                 best_film_description.innerHTML = response.description;
                 let best_film_cover = document.querySelector('#best_film_cover');
-                best_film_cover.setAttribute("src", response.image_url)
+                best_film_cover.setAttribute("src", response.image_url);
             }
         )
     }
@@ -129,7 +129,6 @@ function get_movies_by_genre(genre, element) {
             new carousel.Carousel(response, element, genre, options)
             add_image_event_click(element);
         }
-        
     );
 }
 

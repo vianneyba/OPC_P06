@@ -4,7 +4,7 @@ export class Carousel {
         this.options = options;
         this.element = element;
         this.type = type;
-        this.position = 0;
+        this.position = -1;
         this.create_title();
         this.create_cover();
         this.add_btn_event_click();
@@ -22,36 +22,37 @@ export class Carousel {
 
     create_title() {
         let el_title = this.element.querySelector('h1');
-        el_title.textContent = this.type
+        el_title.textContent = this.type;
     }
 
     create_cover() {
         let div_cover = this.element.querySelector('.carousel__cover');
-        let i = this.position;
         for(let x = 0; x < this.options['visible']; x++) {
-            if(this.movies[i]) {
+            if(this.movies[x]) {
                 let el_img = document.createElement("img");
-                el_img.setAttribute("src", this.movies[i].image_url);
-                el_img.setAttribute("alt", this.movies[i].title);
-                el_img.setAttribute("id_movie", this.movies[i].id);
+                el_img.setAttribute("src", this.movies[x].image_url);
+                el_img.setAttribute("alt", this.movies[x].title);
+                el_img.setAttribute("id_movie", this.movies[x].id);
                 div_cover.appendChild(el_img);
-                i = this.next_position(i);
             }
         }
     }
 
-    change_cover(i, direction) {
+    change_cover(direction) {
+        if (direction === "left") {
+            this.position = this.previous_position(this.position);
+        }
+        else if (direction === "right") {
+            this.position = this.next_position(this.position);
+        }
+
         let pictures = this.element.querySelectorAll("img");
+        let i = this.position;
         for (let picture of pictures) {
             picture.setAttribute("src", this.movies[i].image_url);
             picture.setAttribute("alt", this.movies[i].title);
             picture.setAttribute("id_movie", this.movies[i].id);
             i = this.next_position(i);
-        }
-        if (direction === "left") {
-            this.position = this.previous_position(this.position);
-        } else {
-            this.position = this.next_position(this.position);
         }
     }
 
@@ -62,26 +63,31 @@ export class Carousel {
             this.move_left();
         })
         btn_next.addEventListener("click", () => {
-            this.move_right()
+            this.move_right();
         })
     }
 
     previous_position(i) {
-        if (i === 0) { 
+        if (i == -1 || i == 0) { 
             return this.options['nbr_movie'] - 1;
-        } 
-        return (i - 1) % this.options['nbr_movie'];
+        } else {
+            return (i - 1) % this.options['nbr_movie'];
+        }
     }
 
     next_position(i) {
-        return (i + 1) % this.options['nbr_movie'];
+        if (i === -1) { 
+            return 1;
+        } else {
+            return (i + 1) % this.options['nbr_movie'];
+        }
     }
 
     move_left() {
-        this.change_cover(this.next_position(this.position), "right");
+        this.change_cover("left");
     }
 
     move_right() {
-        this.change_cover(this.previous_position(this.position), "left");
+        this.change_cover("right");
     }
 }

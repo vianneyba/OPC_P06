@@ -6,7 +6,7 @@ export class Modal {
 
     get_list(array) {
         let iterations = array.length;
-        let result = ""
+        let result = "";
         for (const element of array) {
             if (!--iterations) {
                 result += `${element}`;
@@ -39,7 +39,8 @@ export class Modal {
 
     create_directors() {
         let el_directors = this.element.querySelectorAll(".movie_directors")[0];
-        el_directors.querySelectorAll("span")[1].textContent = this.movie.directors;
+        let txt = this.get_list(this.movie.directors);
+        el_directors.querySelectorAll("span")[1].textContent = txt;
     }
 
     create_rated() {
@@ -56,12 +57,15 @@ export class Modal {
         let el_duration = this.element.querySelectorAll(".movie_duration")[0];
         let hours = Math.floor(this.movie.duration / 60);
         let minutes  = this.movie.duration % 60;
+        if(minutes < 10) {
+            minutes = "0"+minutes;
+
+        }
         el_duration.querySelectorAll("span")[1].textContent = `${hours}:${minutes}`;
     }
 
     create_genres() {
         let el_genre = this.element.querySelectorAll(".movie_genres")[0];
-        let iterations = this.movie.genres.length;
         let txt_genre = this.get_list(this.movie.genres);
         el_genre.textContent = txt_genre;
     }
@@ -99,6 +103,6 @@ export class Modal {
         let close_btn = element.getElementsByClassName("close")[0];
         close_btn.onclick = function() {
             element.style.display = "none";
-          }
+        }
     }
 }
