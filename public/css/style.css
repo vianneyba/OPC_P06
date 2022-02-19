@@ -1,6 +1,7 @@
 body {
   background: #AFDEDC;
   margin: auto;
+  color: #000000;
 }
 
 header {
@@ -25,9 +26,14 @@ header li {
 }
 
 #best_film {
-  background: #91A8A4;
-  margin: 10px;
+  background: #ebfffc;
+  margin: auto;
   padding: 10PX;
+}
+#best_film table {
+  background-color: violet;
+  margin: auto;
+  width: 70%;
 }
 #best_film .center {
   text-align: center;
@@ -101,10 +107,9 @@ header li {
   background-color: #fefefe;
 }
 .modal .modal-content {
-  color: black;
   margin: 15% auto;
   padding: 20px;
-  border: 1px solid #888;
+  border: 1px solid #ebfffc;
   width: 80%;
 }
 .modal .close {
@@ -115,7 +120,7 @@ header li {
   margin: 20px;
 }
 .modal .close:hover, .modal .close:focus {
-  color: black;
+  color: #000000;
   text-decoration: none;
   cursor: pointer;
 }

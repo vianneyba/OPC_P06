@@ -1,10 +1,13 @@
 $primary-color:#C4D7F2;
 $secondary-color:#AFDEDC;
-$tertiary-color:#91A8A4;
+$tertiary-color:rgb(235, 255, 252);
+$quaternary-color: #fefefe;
+$color-text: #000000;
 
 body {
     background: $secondary-color;
     margin: auto;
+    color: $color-text;
 }
 
 header {
@@ -30,8 +33,12 @@ header {
 
 #best_film {
   background: $tertiary-color;
-  margin: 10px;
+  margin: auto;
   padding: 10PX;
+  table {
+    margin: auto;
+    width: 70%;
+  }
   .center {
     text-align:center;
     height: 10px;
@@ -96,12 +103,11 @@ header {
     width: 90%;
     height: 90%;
     overflow: auto;
-    background-color: #fefefe;
+    background-color: $quaternary-color;
     .modal-content {
-      color: black;
       margin: 15% auto;
       padding: 20px;
-      border: 1px solid #888;
+      border: 1px solid $tertiary-color;
       width: 80%;
     }
     .close {
@@ -111,7 +117,7 @@ header {
       font-weight: bold;
       margin: 20px;
       &:hover, &:focus {
-        color: black;
+        color: $color-text;
         text-decoration: none;
         cursor: pointer;
       }
