@@ -21,7 +21,7 @@ export class Carousel {
     }
 
     create_title() {
-        let el_title = this.element.querySelector('h1');
+        let el_title = this.element.querySelector('h2');
         el_title.textContent = this.type;
     }
 
